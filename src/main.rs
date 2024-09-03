@@ -7,6 +7,10 @@ struct Options {
     #[clap(default_value = "Wa-pa-pa-pa-pa-pa-pow!")]
     /// What does the fox say?
     message: String,
+    //adds an option for making the fox appear dead
+    #[clap(short = 'd', long = "dead")]
+    /// Make the fox appear dead
+    dead: bool,
 }
 
 fn main() {
