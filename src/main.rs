@@ -16,12 +16,15 @@ struct Options {
 fn main() {
     //[2] uses the derived Parser
     let options = Options::parse(); //returns Options struct populated with parsed argument values
-
     let message = options.message;
+
+    //set options for eyes
+    let eye = if options.dead { "x" } else { "o" };
+
     println!("{}", message);
     println!(" \\");
     println!("  \\");
     println!("     /\\_/\\");
-    println!("    ( o o )");
+    println!("    ( {eye} {eye} )");
     println!("    -( I )-");
 }
