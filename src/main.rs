@@ -3,6 +3,9 @@ use clap::Parser;
 #[derive(Parser)]
 //[1] this is command-line args def'n
 struct Options {
+    //sets default value for if no value entered by user
+    #[clap(default_value = "Wa-pa-pa-pa-pa-pa-pow!")]
+    /// What does the fox say?
     message: String,
 }
 
