@@ -18,6 +18,12 @@ fn main() {
     let options = Options::parse(); //returns Options struct populated with parsed argument values
     let message = options.message;
 
+    //provides an error print
+    if message.to_lowercase() == "woof" {
+        eprintln!("ERROR: A fox shouldn't bark like a dog.");
+        return;
+    }
+
     //set options for eyes
     let eye = if options.dead { "x" } else { "o" };
 
