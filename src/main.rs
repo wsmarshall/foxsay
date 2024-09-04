@@ -20,8 +20,7 @@ fn main() {
 
     //provides an error print
     if message.to_lowercase() == "woof" {
-        eprintln!("ERROR: A fox shouldn't bark like a dog.");
-        return;
+        eprintln!("ERROR: A fox shouldn't bark like a dog.")
     }
 
     //set options for eyes
@@ -33,4 +32,6 @@ fn main() {
     println!("     /\\_/\\");
     println!("    ( {eye} {eye} )");
     println!("    -( I )-");
+
+    //printing priority for 1>, 2> commands: stdout, stderr
 }

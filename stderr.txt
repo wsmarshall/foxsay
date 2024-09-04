@@ -1,0 +1,4 @@
+   Compiling foxsay v0.1.0 (/Users/tom/repos/foxsay)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.56s
+     Running `target/debug/foxsay woof`
+ERROR: A fox shouldn't bark like a dog.
