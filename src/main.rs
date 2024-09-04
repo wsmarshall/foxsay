@@ -1,4 +1,5 @@
 use clap::Parser;
+use colored::Colorize;
 
 #[derive(Parser)]
 //[1] this is command-line args def'n
@@ -26,11 +27,11 @@ fn main() {
     //set options for eyes
     let eye = if options.dead { "x" } else { "o" };
 
-    println!("{}", message);
+    println!("{}", message.bright_red().underline().on_bright_yellow());
     println!(" \\");
     println!("  \\");
     println!("     /\\_/\\");
-    println!("    ( {eye} {eye} )");
+    println!("    ( {eye} {eye} )", eye = eye.green().bold());
     println!("    -( I )-");
 
     //printing priority for 1>, 2> commands: stdout, stderr
