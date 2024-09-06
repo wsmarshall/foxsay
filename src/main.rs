@@ -12,6 +12,10 @@ struct Options {
     #[clap(short = 'd', long = "dead")]
     /// Make the fox appear dead
     dead: bool,
+    //adds a simplified, didactic option for loading pic from a file
+    #[clap(short = 'f', long = "file")]
+    ///Load the fox picture from the specified file
+    foxfile: Option<std::path::PathBuf>,
 }
 
 fn main() {
@@ -24,15 +28,27 @@ fn main() {
         eprintln!("ERROR: A fox shouldn't bark like a dog.")
     }
 
-    //set options for eyes
-    let eye = if options.dead { "x" } else { "o" };
+    match &options.foxfile {
+        Some(path) => {
+            let fox_template =
+                std::fs::read_to_string(path).expect(&format!("could not read file {:?}", path));
+            let eye = format!("{}", eye.green().bold());
+            let fox_picture = fox_template.replace("{eye}", &eye);
+            println!("{}", message.bright_red().on_bright_yellow());
+            println!("{}", &cat_picture);
+        }
+        None => {
+            //set options for eyes
+            let eye = if options.dead { "x" } else { "o" };
 
-    println!("{}", message.bright_red().underline().on_bright_yellow());
-    println!(" \\");
-    println!("  \\");
-    println!("     /\\_/\\");
-    println!("    ( {eye} {eye} )", eye = eye.green().bold());
-    println!("    -( I )-");
+            println!("{}", message.bright_red().underline().on_bright_yellow());
+            println!(" \\");
+            println!("  \\");
+            println!("     /\\_/\\");
+            println!("    ( {eye} {eye} )", eye = eye.green().bold());
+            println!("    -( I )-");
+        }
+    }
 
     //printing priority for 1>, 2> commands: stdout, stderr
 }
