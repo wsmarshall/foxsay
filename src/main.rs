@@ -33,6 +33,7 @@ fn main() {
 
     match &options.foxfile {
         Some(path) => {
+            //reads in an ascii art text file
             let fox_template =
                 std::fs::read_to_string(path).expect(&format!("could not read file {:?}", path));
             let eye = format!("{}", eye.green().bold());
