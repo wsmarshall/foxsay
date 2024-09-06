@@ -1,6 +1,7 @@
 use anyhow::{Context, Result};
 use clap::Parser;
 use colored::Colorize;
+use std::io::{self, Read};
 
 #[derive(Parser)]
 //command-line args def'n
@@ -17,12 +18,20 @@ struct Options {
     #[clap(short = 'f', long = "file")]
     ///Load the fox picture from the specified file
     foxfile: Option<std::path::PathBuf>,
+    #[clap(short = 'i', long = "stdin")]
+    /// Reads msg from STDIN instead of CLI arg
+    stdin: bool,
 }
 
 fn main() -> Result<()> {
     //uses the derived Parser
     let options = Options::parse(); //returns Options struct populated with parsed argument values
-    let message = options.message; //accesses relevant portion of the Options struct
+    let mut message = String::new();
+    if options.stdin {
+        io::stdin().read_to_string(&mut message)?;
+    } else {
+        message = options.message; //accesses relevant portion of the Options struct
+    };
 
     //provides an error print
     if message.to_lowercase() == "woof" {
