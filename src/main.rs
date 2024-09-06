@@ -28,19 +28,21 @@ fn main() {
         eprintln!("ERROR: A fox shouldn't bark like a dog.")
     }
 
+    //set options for eyes
+    let eye = if options.dead { "x" } else { "o" };
+
     match &options.foxfile {
         Some(path) => {
             let fox_template =
                 std::fs::read_to_string(path).expect(&format!("could not read file {:?}", path));
             let eye = format!("{}", eye.green().bold());
+            //format!() would need formatting string at compile time, but fox_template is loaded at runtime
+            //so use String.replace()
             let fox_picture = fox_template.replace("{eye}", &eye);
             println!("{}", message.bright_red().on_bright_yellow());
-            println!("{}", &cat_picture);
+            println!("{}", &fox_picture);
         }
         None => {
-            //set options for eyes
-            let eye = if options.dead { "x" } else { "o" };
-
             println!("{}", message.bright_red().underline().on_bright_yellow());
             println!(" \\");
             println!("  \\");
