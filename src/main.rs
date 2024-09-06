@@ -1,3 +1,4 @@
+use anyhow::{Context, Result};
 use clap::Parser;
 use colored::Colorize;
 
@@ -18,7 +19,7 @@ struct Options {
     foxfile: Option<std::path::PathBuf>,
 }
 
-fn main() -> Result<(), Box<dyn std::error::Error>> {
+fn main() -> Result<()> {
     //uses the derived Parser
     let options = Options::parse(); //returns Options struct populated with parsed argument values
     let message = options.message; //accesses relevant portion of the Options struct
@@ -34,7 +35,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     match &options.foxfile {
         Some(path) => {
             //reads in an ascii art text file
-            let fox_template = std::fs::read_to_string(path)?;
+            let fox_template = std::fs::read_to_string(path)
+                .with_context(|| format!("Could not read file {:?}", path))?;
             let eye = format!("{}", eye.green().bold());
             //format!() would need formatting string at compile time, but fox_template is loaded at runtime
             //so use String.replace()
