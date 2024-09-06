@@ -18,7 +18,7 @@ struct Options {
     foxfile: Option<std::path::PathBuf>,
 }
 
-fn main() {
+fn main() -> Result<(), Box<dyn std::error::Error>> {
     //uses the derived Parser
     let options = Options::parse(); //returns Options struct populated with parsed argument values
     let message = options.message; //accesses relevant portion of the Options struct
@@ -34,14 +34,14 @@ fn main() {
     match &options.foxfile {
         Some(path) => {
             //reads in an ascii art text file
-            let fox_template =
-                std::fs::read_to_string(path).expect(&format!("could not read file {:?}", path));
+            let fox_template = std::fs::read_to_string(path)?;
             let eye = format!("{}", eye.green().bold());
             //format!() would need formatting string at compile time, but fox_template is loaded at runtime
             //so use String.replace()
             let fox_picture = fox_template.replace("{eye}", &eye);
             println!("{}", message.bright_red().on_bright_yellow());
             println!("{}", &fox_picture);
+            Ok(())
         }
         None => {
             println!("{}", message.bright_red().underline().on_bright_yellow());
@@ -50,6 +50,7 @@ fn main() {
             println!("     /\\_/\\");
             println!("    ( {eye} {eye} )", eye = eye.green().bold());
             println!("    -( I )-");
+            Ok(())
         }
     }
 
