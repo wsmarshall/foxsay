@@ -2,7 +2,7 @@ use clap::Parser;
 use colored::Colorize;
 
 #[derive(Parser)]
-//[1] this is command-line args def'n
+//command-line args def'n
 struct Options {
     //sets default value for if no value entered by user
     #[clap(default_value = "Wa-pa-pa-pa-pa-pa-pow!")]
@@ -19,9 +19,9 @@ struct Options {
 }
 
 fn main() {
-    //[2] uses the derived Parser
+    //uses the derived Parser
     let options = Options::parse(); //returns Options struct populated with parsed argument values
-    let message = options.message;
+    let message = options.message; //accesses relevant portion of the Options struct
 
     //provides an error print
     if message.to_lowercase() == "woof" {
