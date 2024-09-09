@@ -5,3 +5,5 @@ Uses Clap for command-line argument parsing. Has options for positional argument
 Has color as console printing output uptions, file IO, standard input, output, and error options. 
 
 Incorporates some integration testing. 
+
+With thanks to S. Lyu and A. Rzeznik for helpful guidance.
