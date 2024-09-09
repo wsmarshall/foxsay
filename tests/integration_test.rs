@@ -1,5 +1,5 @@
 use assert_cmd::prelude::*; //imports some useful traits, like cargo_bin(), assert(), success()
-use predicates::prelude::*;
+use predicates::prelude::*; //for verifying STDOUT string contents
 use std::process::Command; //Command struct for running program in a newly spawned process
 
 #[test]
